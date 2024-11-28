@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"os"
 	"path/filepath"
-	db "todoapp/internal/db"
+	"todoapp/internal/controllers"
 )
 
 func main() {
@@ -40,16 +40,6 @@ func main() {
 	}
 
 	fmt.Printf("Command is %s\n", command)
-	// fmt.Printf("Age: %d\n", age)
-	// fmt.Printf("Height: %.2f\n", height)
 
-	if command == "show" {
-		id_rec, err := db.ReadAllRec()
-		if err != nil {
-			fmt.Printf("Ошибка: %v\n", err)
-		} else {
-			fmt.Printf("Прочитано: %v", id_rec)
-		}
-	}
-
+	controllers.HandleConsoleCommand(command, todo_id)
 }
