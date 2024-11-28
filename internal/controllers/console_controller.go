@@ -5,7 +5,7 @@ import (
 	"todoapp/internal/db"
 )
 
-// Обрабатывает запросы для сомандной строки
+// Обрабатывает запросы для командной строки
 // err: HCC-001
 func HandleConsoleCommand(command string, todo_id int) {
 
