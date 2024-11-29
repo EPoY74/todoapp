@@ -50,7 +50,7 @@ func SetPathToDB(baseDir string, dbName string) string {
 	return pathToDB
 }
 
-// ЗАГЛУШКА: Читаю данные из БД
+// Читаю все записи из таблицы
 func ReadAllRec() (int, error) {
 	// последний ReadRec--4
 	// Функция читает данные из БД
