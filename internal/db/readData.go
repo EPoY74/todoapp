@@ -4,9 +4,12 @@ import (
 	"database/sql"
 	"fmt"
 	"os"
+	"path/filepath"
+	"strings"
 
 	//  Импортирую для инициализации драйвера
 	// _ "github.com/mattn/go-sqlite3"
+
 	_ "modernc.org/sqlite"
 )
 
@@ -20,21 +23,51 @@ type todo_record struct {
 	date_of_gone     sql.NullString
 }
 
-var s todo_record
+// var s todo_record
 
 func init() {
 
 }
 
+// Получаю путь до базовой папки приложения
+func GetBaseDirPath() (string, error) {
+	cutting := "\\cmd\\console"
+	prorgammStartedDir, err := os.Getwd()
+	//error GBDP--001
+	if err != nil {
+		fmt.Printf("GBDP--001: Ошибка при формировании пути к каталогу %v", err)
+		fmt.Scanln()
+		return "", err
+	}
+	baseDir := strings.Replace(prorgammStartedDir, cutting, "\\", 1)
+	return baseDir, nil
+}
+
+// Устанавлваю путь до БД
+func SetPathToDB(baseDir string, dbName string) string {
+	pathToDB := filepath.Join(baseDir, "internal", "db", dbName)
+	fmt.Printf("path: %v", pathToDB)
+	return pathToDB
+}
+
 // ЗАГЛУШКА: Читаю данные из БД
 func ReadAllRec() (int, error) {
+	// последний ReadRec--4
 	// Функция читает данные из БД
 	// id ReadRec--1
 	// if id_rec < 0 {
 	// 	return 0, errors.New(
 	// 		"id ReadRec--1: недопустимый идентификатор записи")
 	// }
-	db_connect, err := sql.Open("sqlite", "ep20231204_todo_cli.db")
+	basePath, err := GetBaseDirPath()
+	if err != nil {
+		//rr--001
+		fmt.Printf("rr--001: %v", err)
+		fmt.Scanln()
+		os.Exit(1)
+	}
+	pathToBD := SetPathToDB(basePath, "ep20231204_todo_cli.db")
+	db_connect, err := sql.Open("sqlite", pathToBD)
 	// id ReadRec--2:
 	if err != nil {
 		fmt.Printf("ReadRec--2: Не могу открыть БД %v", err)
