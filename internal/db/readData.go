@@ -59,6 +59,7 @@ func ReadAllRec() (int, error) {
 	// 	return 0, errors.New(
 	// 		"id ReadRec--1: недопустимый идентификатор записи")
 	// }
+	fmt.Println("Привет!")
 	basePath, err := GetBaseDirPath()
 	if err != nil {
 		//rr--001
