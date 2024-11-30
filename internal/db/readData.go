@@ -11,17 +11,19 @@ import (
 	// _ "github.com/mattn/go-sqlite3"
 
 	_ "modernc.org/sqlite"
+
+	"todoapp/internal/models"
 )
 
-// Структура для записи задачи todo
-type todo_record struct {
-	id               int
-	data_of_creation sql.NullString
-	date_max         sql.NullString
-	todo_text        sql.NullString
-	is_gone          int
-	date_of_gone     sql.NullString
-}
+// // Структура для записи задачи todo
+// type todo_record struct {
+// 	id               int
+// 	data_of_creation sql.NullString
+// 	date_max         sql.NullString
+// 	todo_text        sql.NullString
+// 	is_gone          int
+// 	date_of_gone     sql.NullString
+// }
 
 // var s todo_record
 
@@ -95,20 +97,20 @@ func ReadAllRec() (int, error) {
 		os.Exit(1)
 	}
 	defer rows.Close()
-	todo_records := []todo_record{}
+	todoRecords := []models.TodoRecord{}
 
 	fmt.Printf("rows type is %T/n", rows)
 
 	for rows.Next() {
-		todo := todo_record{}
+		todo := models.TodoRecord{}
 
 		err := rows.Scan(
-			&todo.id,
-			&todo.data_of_creation,
-			&todo.date_max,
-			&todo.todo_text,
-			&todo.is_gone,
-			&todo.date_of_gone,
+			&todo.ID,
+			&todo.Data_of_creation,
+			&todo.Date_max,
+			&todo.Todo_text,
+			&todo.Is_gone,
+			&todo.Date_of_gone,
 		)
 		if err != nil {
 			//id ReadRec--4
@@ -116,17 +118,17 @@ func ReadAllRec() (int, error) {
 			fmt.Scanln()
 			continue
 		}
-		todo_records = append(todo_records, todo)
+		todoRecords = append(todoRecords, todo)
 	}
 
-	for _, todo := range todo_records {
+	for _, todo := range todoRecords {
 		fmt.Println(
-			todo.id,
-			todo.data_of_creation,
-			todo.date_max,
-			todo.todo_text,
-			todo.is_gone,
-			todo.date_of_gone,
+			todo.ID,
+			todo.Data_of_creation,
+			todo.Date_max,
+			todo.Todo_text,
+			todo.Is_gone,
+			todo.Date_of_gone,
 		)
 	}
 	return 1, nil
