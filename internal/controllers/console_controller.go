@@ -2,6 +2,8 @@ package controllers
 
 import (
 	"fmt"
+	"os"
+	"path/filepath"
 	"todoapp/internal/db"
 )
 
@@ -16,6 +18,11 @@ func HandleConsoleCommand(command string, todo_id int) {
 		} else {
 			fmt.Printf("Прочитано: %v", id_rec)
 		}
+	} else {
+		fmt.Println("Пожалуйста, введите поддерживаемую команду.")
+		fmt.Printf("Для получения помощи:\n%v -help", filepath.Base(os.Args[0]))
+
+		os.Exit(0)
 	}
 
 }
