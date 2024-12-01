@@ -26,10 +26,14 @@ func main() {
 	flag.Usage = func() {
 		fmt.Fprintf(os.Stderr, "Usage of %s: \n", filepath.Base(os.Args[0]))
 		flag.PrintDefaults()
+		fmt.Fprintf(
+			os.Stderr,
+			"For examlpe: %v -command=\"your_command\"",
+			filepath.Base(os.Args[0]))
 	}
 
-	flag.StringVar(&command, "command", "show", "The command for ToDo")
-	flag.IntVar(&todo_id, "id", 0, "Id for sowing todo")
+	flag.StringVar(&command, "command", "none", "The command for ToDo")
+	flag.IntVar(&todo_id, "id", 0, "Id for showing todo")
 	// flag.Float64Var(&height, "height", 180, "Ваш рост (см)")
 
 	flag.Parse()
