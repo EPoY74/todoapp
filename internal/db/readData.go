@@ -62,14 +62,14 @@ func ReadAllRec() (int, error) {
 	// 		"id ReadRec--1: недопустимый идентификатор записи")
 	// }
 	fmt.Println("Привет!")
-	basePath, err := GetBaseDirPath()
-	if err != nil {
-		//rr--001
-		fmt.Printf("rr--001: %v", err)
-		fmt.Scanln()
-		os.Exit(1)
-	}
-	pathToBD := SetPathToDB(basePath, "ep20231204_todo_cli.db")
+	// basePath, err := GetBaseDirPath()
+	// if err != nil {
+	// 	//rr--001
+	// 	fmt.Printf("rr--001: %v", err)
+	// 	fmt.Scanln()
+	// 	os.Exit(1)
+	// }
+	// pathToBD := SetPathToDB(basePath, "ep20231204_todo_cli.db")
 	db_connect, err := sql.Open("sqlite", "ep20231204_todo_cli.db")
 	// id ReadRec--2:
 	if err != nil {
