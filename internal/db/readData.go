@@ -70,7 +70,7 @@ func ReadAllRec() (int, error) {
 		os.Exit(1)
 	}
 	pathToBD := SetPathToDB(basePath, "ep20231204_todo_cli.db")
-	db_connect, err := sql.Open("sqlite", pathToBD)
+	db_connect, err := sql.Open("sqlite", "ep20231204_todo_cli.db")
 	// id ReadRec--2:
 	if err != nil {
 		fmt.Printf("ReadRec--2: Не могу открыть БД %v", err)
