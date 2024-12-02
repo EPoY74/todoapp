@@ -53,7 +53,7 @@ func SetPathToDB(baseDir string, dbName string) string {
 }
 
 // Читаю все записи из таблицы
-func ReadAllRec() (int, error) {
+func ReadAllRec() ([]models.TodoRecord, error) {
 	// последний ReadRec--4
 	// Функция читает данные из БД
 	// id ReadRec--1
@@ -99,7 +99,7 @@ func ReadAllRec() (int, error) {
 	defer rows.Close()
 	todoRecords := []models.TodoRecord{}
 
-	fmt.Printf("rows type is %T/n", rows)
+	// fmt.Printf("rows type is %T/n", rows)
 
 	for rows.Next() {
 		todo := models.TodoRecord{}
@@ -121,15 +121,15 @@ func ReadAllRec() (int, error) {
 		todoRecords = append(todoRecords, todo)
 	}
 
-	for _, todo := range todoRecords {
-		fmt.Println(
-			todo.ID,
-			todo.Data_of_creation,
-			todo.Date_max,
-			todo.Todo_text,
-			todo.Is_gone,
-			todo.Date_of_gone,
-		)
-	}
-	return 1, nil
+	// for _, todo := range todoRecords {
+	// 	fmt.Println(
+	// 		todo.ID,
+	// 		todo.Data_of_creation,
+	// 		todo.Date_max,
+	// 		todo.Todo_text,
+	// 		todo.Is_gone,
+	// 		todo.Date_of_gone,
+	// 	)
+	// }
+	return todoRecords, nil
 }
