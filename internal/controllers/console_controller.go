@@ -12,22 +12,43 @@ import (
 func HandleConsoleCommand(command string, todo_id int) {
 
 	if command == "show" {
-		id_rec, err := db.ReadAllRec()
-		if err != nil {
-			fmt.Printf("HCC-001: Ошибка: %v\n", err)
+		if todo_id > 0 {
+			id_rec, err := db.ReadOneRec(todo_id)
+			if err != nil {
+				// err: HCC-002
+				fmt.Printf("HCC-002: Ошибка: %v\n", err)
+			} else {
+				// fmt.Printf("Прочитано: %v", id_rec)
+				for _, todo := range id_rec {
+					fmt.Println(
+						todo.ID,
+						todo.Data_of_creation,
+						todo.Date_max,
+						todo.Todo_text,
+						todo.Is_gone,
+						todo.Date_of_gone,
+					)
+				}
+			}
 		} else {
-			// fmt.Printf("Прочитано: %v", id_rec)
-			for _, todo := range id_rec {
-				fmt.Println(
-					todo.ID,
-					todo.Data_of_creation,
-					todo.Date_max,
-					todo.Todo_text,
-					todo.Is_gone,
-					todo.Date_of_gone,
-				)
+			id_rec, err := db.ReadAllRec()
+			if err != nil {
+				fmt.Printf("HCC-001: Ошибка: %v\n", err)
+			} else {
+				// fmt.Printf("Прочитано: %v", id_rec)
+				for _, todo := range id_rec {
+					fmt.Println(
+						todo.ID,
+						todo.Data_of_creation,
+						todo.Date_max,
+						todo.Todo_text,
+						todo.Is_gone,
+						todo.Date_of_gone,
+					)
+				}
 			}
 		}
+
 	} else {
 		fmt.Println("Пожалуйста, введите поддерживаемую команду.")
 		fmt.Printf("Для получения помощи:\n%v -help", filepath.Base(os.Args[0]))
