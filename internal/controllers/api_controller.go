@@ -9,12 +9,11 @@ import (
 	"todoapp/internal/models"
 )
 
-var (
-	todoRecords []models.TodoRecord
-	err         error
-)
-
 func HandleTasks(w http.ResponseWriter, r *http.Request) {
+	var (
+		todoRecords []models.TodoRecord
+		err         error
+	)
 
 	if r.Method == http.MethodGet {
 		// text/plain"
