@@ -24,13 +24,26 @@ func HandleTasks(w http.ResponseWriter, r *http.Request) {
 		if url_recs_id != "" {
 			recs_id, err := strconv.Atoi(url_recs_id)
 			if err != nil {
-				//HT--003
-				fmt.Printf("HT-003: Ошибка: %v\n", err)
+				//HT--0031
+				fmt.Printf("HT-0031: Ошибка: %v\n", err)
 			}
 			if recs_id > 0 {
 				fmt.Printf("Получаю запись %v \n", recs_id)
 				fmt.Fprintf(w, "Получаю запись %v \n", recs_id)
-				// w.Write(data)
+				todoRecords, err = db.ReadOneRec(recs_id)
+				if err != nil {
+					fmt.Printf("HT-0011: Ошибка: %v\n", err)
+				}
+
+				data, err := json.MarshalIndent(todoRecords, "", " ")
+				if err != nil {
+					http.Error(w,
+						//HT--0021
+						fmt.Sprintf("HT--0021: Ошибка при кодировании JSON: %v", err),
+						http.StatusInternalServerError)
+					return
+				}
+				w.Write(data)
 				return
 			}
 		} else {
