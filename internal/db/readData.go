@@ -61,7 +61,7 @@ func ReadAllRec() ([]models.TodoRecord, error) {
 	// 	return 0, errors.New(
 	// 		"id ReadRec--1: недопустимый идентификатор записи")
 	// }
-	fmt.Println("Привет!")
+	fmt.Println("Привет! func ReadAllRec()")
 	// basePath, err := GetBaseDirPath()
 	// if err != nil {
 	// 	//rr--001
